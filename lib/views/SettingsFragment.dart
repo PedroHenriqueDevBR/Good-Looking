@@ -25,7 +25,7 @@ class _SettingsFragmentState extends State<SettingsFragment> {
                   borderRadius: BorderRadius.circular(10)
                 ),
                 margin: EdgeInsets.all(8),
-                color: _button_color,
+                color: Colors.lightBlue,
                 child: Container(
                   padding: _button_padding,
                   width: MediaQuery.of(context).size.width,
@@ -36,11 +36,19 @@ class _SettingsFragmentState extends State<SettingsFragment> {
                 ),
               ),
               Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   _card_config_default('Clientes', Icons.people),
                   _card_config_default('Serviços', Icons.camera),
+                ],
+              ),
+              SizedBox(height: 5,),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  _card_config_default('Ajudantes', Icons.person_pin),
                 ],
               ),
             ],
@@ -51,9 +59,9 @@ class _SettingsFragmentState extends State<SettingsFragment> {
 
   Card _card_config_default(String text, IconData icon) {
     return Card(
-      elevation: 3,
+      elevation: 5,
       shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10)
+          borderRadius: BorderRadius.circular(15)
       ),
       color: _button_color,
       child: Container(
@@ -63,7 +71,7 @@ class _SettingsFragmentState extends State<SettingsFragment> {
           children: <Widget>[
             Icon(
               icon,
-              size: 54,
+              size: 45,
               color: Colors.white,
             ),
             Text(
