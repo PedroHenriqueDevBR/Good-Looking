@@ -9,94 +9,108 @@ class SettingsFragment extends StatefulWidget {
 
 class _SettingsFragmentState extends State<SettingsFragment> {
 
-  Color _button_color = Colors.deepPurpleAccent;
-  EdgeInsets _button_padding = EdgeInsets.symmetric(vertical: 50, horizontal: 16);
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      itemCount: data.length,
+        itemBuilder: (context, index) => EntryItem(data[index]),
+
+    );
+  }
+
+
+
+}
+
+// One entry in the multilevel list displayed by this app.
+class Entry {
+  Entry(this.title, this.index, [this.children = const <Entry>[]]);
+
+  final bool index;
+  final String title;
+  final List<Entry> children;
+}
+
+// The entire multilevel list displayed by this app.
+final List<Entry> data = <Entry>[
+  Entry(
+    'Serviços',
+    true,
+    <Entry>[
+      Entry(
+          'Relatorios',
+          false,
+          <Entry>[
+            Entry('Serviço mais solicitado', false),
+          ]
+      ),
+      Entry('Listar todos', false),
+      Entry('Cadastrar serviço', false),
+    ],
+  ),
+  Entry(
+    'Clientes',
+    true,
+    <Entry>[
+      Entry(
+          'Relatorios',
+          false,
+          <Entry>[
+            Entry('Melhor cliente', false),
+            Entry('Pagamentos pendentes', false),
+          ]
+      ),
+      Entry('Listar todos', false),
+      Entry('Cadastrar cliente', false),
+    ],
+  ),
+  Entry(
+    'Ajudantes',
+    true,
+    <Entry>[
+      Entry(
+          'Relatorios',
+          false,
+          <Entry>[
+            Entry('Ajudante do mes', false),
+          ]
+      ),
+      Entry('Listar todos', false),
+      Entry('Cadastrar ajudante', false),
+    ],
+  ),
+];
+
+// Displays one Entry. If the entry has children then it's displayed
+// with an ExpansionTile.
+class EntryItem extends StatelessWidget {
+  const EntryItem(this.entry);
+
+  final Entry entry;
+
+  Widget _buildTiles(Entry root) {
+    if (root.children.isEmpty) return ListTile(title: Text(root.title));
+    return ExpansionTile(
+      key: PageStorageKey<Entry>(root),
+      title: Text(root.title),
+      initiallyExpanded: root.index,
+      trailing: null,
+      backgroundColor: _backgroundSecondary(root),
+      children: root.children.map(_buildTiles).toList(),
+    );
+  }
+
+  Color _backgroundSecondary(Entry root) {
+    if (root.index) {
+      return Colors.white;
+    } else {
+      return Colors.blueGrey[50];
+    }
+  }
+
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.blueGrey[900],
-          padding: EdgeInsets.all(8),
-          child: Column(
-            children: <Widget>[
-              Card(
-                elevation: 3,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10)
-                ),
-                margin: EdgeInsets.all(8),
-                color: Colors.lightBlue,
-                child: Container(
-                  padding: _button_padding,
-                  width: MediaQuery.of(context).size.width,
-                  child: Center(
-                    widthFactor: MediaQuery.of(context).size.width,
-                    child: _text_default('Configuraçoes'),
-                  ),
-                ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  _card_config_default('Clientes', Icons.people),
-                  _card_config_default('Serviços', Icons.camera),
-                ],
-              ),
-              SizedBox(height: 5,),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  _card_config_default('Ajudantes', Icons.person_pin),
-                ],
-              ),
-            ],
-          ),
-        );
-  }
-
-
-  Card _card_config_default(String text, IconData icon) {
-    return Card(
-      elevation: 5,
-      shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(15)
-      ),
-      color: _button_color,
-      child: Container(
-        width: MediaQuery.of(context).size.width / 2.3,
-        padding: _button_padding,
-        child: Column(
-          children: <Widget>[
-            Icon(
-              icon,
-              size: 45,
-              color: Colors.white,
-            ),
-            Text(
-              text,
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 14
-              ),
-            )
-          ],
-        ),
-      ),
-    );
-  }
-
-  Text _text_default(String text) {
-    return Text(
-      text,
-      style: TextStyle(
-        color: Colors.white,
-        fontSize: 18,
-        fontWeight: FontWeight.bold,
-        letterSpacing: 3,
-        shadows: [Shadow(color: Colors.blueGrey[700], offset: Offset(1, 3))],
-      ),
-    );
+    return _buildTiles(entry);
   }
 }
