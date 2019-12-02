@@ -14,7 +14,7 @@ class _HomeActivityState extends State<HomeActivity> {
   int _page_number = 0;
 
   final List<Widget> _pages = [
-    new HomeFragment('Pagina 01'),
+    new HomeFragment(),
     new DemandFragment(),
     new SettingsFragment(),
   ];
