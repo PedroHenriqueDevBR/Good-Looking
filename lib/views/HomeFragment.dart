@@ -7,9 +7,8 @@ class HomeFragment extends StatefulWidget {
 
 class _HomeFragmentState extends State<HomeFragment> {
 
-  Color _button_color = Colors.deepPurpleAccent;
+  Color _button_color = Colors.pinkAccent;
   EdgeInsets _button_padding = EdgeInsets.symmetric(vertical: 50, horizontal: 16);
-
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +22,7 @@ class _HomeFragmentState extends State<HomeFragment> {
                 borderRadius: BorderRadius.circular(10)
             ),
             margin: EdgeInsets.all(8),
-            color: Colors.deepPurple,
+            color: Colors.pink,
             child: Container(
               padding: _button_padding,
               width: MediaQuery.of(context).size.width,
@@ -56,7 +55,7 @@ class _HomeFragmentState extends State<HomeFragment> {
                 borderRadius: BorderRadius.circular(10)
             ),
             margin: EdgeInsets.all(8),
-            color: Colors.deepPurple,
+            color: Colors.pink,
             child: Container(
               padding: _button_padding,
               width: MediaQuery.of(context).size.width,

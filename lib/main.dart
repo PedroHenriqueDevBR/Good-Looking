@@ -6,7 +6,7 @@ void main() {
     title: 'Gerenciamento de OS',
     debugShowCheckedModeBanner: true,
     theme: ThemeData(
-      primarySwatch: Colors.purple
+      primarySwatch: Colors.pink
     ),
     home: HomeActivity(),
   ));

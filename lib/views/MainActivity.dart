@@ -41,6 +41,9 @@ class _HomeActivityState extends State<HomeActivity> {
   Widget bottom_navigation() {
     return BottomNavigationBar(
       currentIndex: _page_number,
+      backgroundColor: Colors.pink[400],
+      unselectedItemColor: Colors.white,
+      selectedItemColor: Colors.blueGrey[200],
       onTap: _alterPage,
       selectedFontSize: 13,
       showUnselectedLabels: false,
@@ -69,7 +72,6 @@ class _HomeActivityState extends State<HomeActivity> {
 
   AppBar header() {
     return AppBar(
-      backgroundColor: Colors.deepPurple,
       title: Text('Gerenciamento'),
       actions: <Widget>[
         IconButton(icon:
