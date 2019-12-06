@@ -11,9 +11,23 @@ Aplicativo android desenvolvido utilizando a IDE Android Studio juntamento com o
 O desenvolvimento do aplicativo está sendo realizado para uma pessoa específica, por esse motivo os requisitos também serão bem específicos.
 O objetivo principal do aplicativo é facilitar o controle de clientes e ordem de serviços que são solicitados para profissinal da área de estética.
 
+## Tecnologias utilizadas
+
+### Android Studio
+
+A IDE escolhida para o desenvolvimento da aplicação, por ser completa e oferecer uma maior produtividade.
+
+<img src="https://dfilitto.com.br/wp-content/uploads/2019/04/android-studio-logo.png" alt="Android studio logo" width="50%" />
+
+### Flutter
+
+Framework desenvolvido em dart para facilitar o desenvolvimento de aplicativos multiplataforma.
+
+<img src="https://simpleactivity435203168.files.wordpress.com/2019/09/flutter-1024x486.png?w=1086" alt="Modelagem da aplicação" width="50%" />
+
 ## Modelagem do projeto
 
-<img src="" alt="Modelagem da aplicação" width="100%" />
+<img src="https://user-images.githubusercontent.com/36716898/70194053-eb55ac80-16df-11ea-80d3-144e7d8ddc8b.jpg" alt="Modelagem da aplicação" width="80%" />
 
 A modelagem do aplicativo consiste em 4 classes, são elas:
  - Cliente (client)
@@ -39,25 +53,9 @@ Há 3 (três) atividades principais que servem de base para o acesso ás demais,
 
 ***Configurações***: Responsável pelo cadastro e modificação dos dados da aplicação, isso inclui o cadastro de clientes, funcionários e serviços.
 
-<img src="" alt="Modelagem da aplicação" width="100%" />
+<img src="https://user-images.githubusercontent.com/36716898/70194092-193af100-16e0-11ea-8d88-e3a5a3c0f472.jpg" alt="Modelagem da aplicação" width="100%" />
 
 Outras atividades estão listadas na modelagem apresentada, são atividades específicas, realizam apenas uma ação, que pode ser o CRUD de uma entidade por exemplo.
-
-
-## Tecnologias utilizadas
-
-### Android Studio
-
-A IDE escolhida para o desenvolvimento da aplicação, por ser completa e oferecer uma maior produtividade.
-
-<img src="" alt="Modelagem da aplicação" width="100%" />
-
-### Flutter
-
-Framework desenvolvido em dart para facilitar o desenvolvimento de aplicativos multiplataforma.
-
-<img src="" alt="Modelagem da aplicação" width="100%" />
-
 
 ## Documentação do Flutter
 
