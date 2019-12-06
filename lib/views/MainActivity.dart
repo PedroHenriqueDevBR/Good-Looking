@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:good_look_app/views/CreateClientActivity.dart';
 import 'package:good_look_app/views/DemandFragment.dart';
 import 'package:good_look_app/views/HomeFragment.dart';
 import 'package:good_look_app/views/SettingsFragment.dart';
@@ -19,8 +20,11 @@ class _HomeActivityState extends State<HomeActivity> {
     new SettingsFragment(),
   ];
 
-  void _showInfo() {
-    print('Botao info precionado');
+  void _addDemand() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => CreateClientActivity())
+    );
   }
 
   void _alterPage(int index) {
@@ -74,9 +78,8 @@ class _HomeActivityState extends State<HomeActivity> {
     return AppBar(
       title: Text('Gerenciamento'),
       actions: <Widget>[
-        IconButton(icon:
-        Icon(Icons.info_outline),
-            onPressed: _showInfo)
+        IconButton(icon: Icon(Icons.library_add),
+            onPressed: _addDemand)
       ],
     );
   }

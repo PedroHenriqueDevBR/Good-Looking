@@ -24,10 +24,10 @@ class _DemandFragmentState extends State<DemandFragment> {
     return Container(
       child: ListView.builder(
         itemCount: demands.length,
-        padding: EdgeInsets.all(8),
         itemBuilder: (context, index) {
           return ListTile(
-            trailing: Icon(Icons.perm_identity),
+            leading: Icon(Icons.perm_identity),
+            trailing: Icon(Icons.keyboard_arrow_right),
             title: Text(demands[index].client),
             subtitle: Text(demands[index].date_service),
             contentPadding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
