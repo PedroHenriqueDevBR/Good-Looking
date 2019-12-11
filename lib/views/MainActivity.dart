@@ -45,9 +45,9 @@ class _HomeActivityState extends State<HomeActivity> {
   Widget bottom_navigation() {
     return BottomNavigationBar(
       currentIndex: _page_number,
-      backgroundColor: Colors.pink[400],
-      unselectedItemColor: Colors.white,
-      selectedItemColor: Colors.blueGrey[200],
+      backgroundColor: Colors.deepPurple,
+      unselectedItemColor: Colors.blueGrey[100],
+      selectedItemColor: Colors.white,
       onTap: _alterPage,
       selectedFontSize: 13,
       showUnselectedLabels: false,
