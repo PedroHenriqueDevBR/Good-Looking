@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:good_look_app/views/CreateClientActivity.dart';
 import 'package:good_look_app/views/DemandFragment.dart';
 import 'package:good_look_app/views/HomeFragment.dart';
+import 'package:good_look_app/views/ListClientActivity.dart';
 import 'package:good_look_app/views/SettingsFragment.dart';
 
 
@@ -23,7 +24,7 @@ class _HomeActivityState extends State<HomeActivity> {
   void _addDemand() {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => CreateClientActivity())
+      MaterialPageRoute(builder: (context) => ListClientActivity())
     );
   }
 
