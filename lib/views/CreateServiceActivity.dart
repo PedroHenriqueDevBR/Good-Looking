@@ -27,7 +27,7 @@ class _CreateServiceActivityState extends State<CreateServiceActivity> {
         child: Column(
           children: <Widget>[
             Text(
-              'Cadastrar novo Cliente',
+              'Cadastrar novo serviço',
               textAlign: TextAlign.center,
               style: TextStyle(
                   fontSize: 16

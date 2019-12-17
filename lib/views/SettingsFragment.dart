@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:good_look_app/views/ListDemandActivity.dart';
 
-import 'CreateClientActivity.dart';
-import 'CreateServiceActivity.dart';
-import 'CreateEmployeeActivity.dart';
-import 'CreateDemandActivity.dart';
+import 'ListClientActivity.dart';
+import 'ListServiceActivity.dart';
+import 'ListEmployeeActivity.dart';
+import 'ListDemandActivity.dart';
 
 
 class SettingsFragment extends StatefulWidget {
@@ -20,28 +21,28 @@ class _SettingsFragmentState extends State<SettingsFragment> {
       ConfigurationItem('Serviços', 'Serviços cadastrados', () {
         Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => CreateServiceActivity())
+            MaterialPageRoute(builder: (context) =>  ListServiceActivity())
         );
       }, Icons.shopping_basket),
 
       ConfigurationItem('Clientes', 'Acessar os dados de todos os clientes', (){
         Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => CreateClientActivity())
+            MaterialPageRoute(builder: (context) => ListClientActivity())
         );
       }, Icons.people_outline),
 
       ConfigurationItem('Ajudantes', 'Ajudantes nos serviços', () {
         Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => CreateEmployeeActivity())
+            MaterialPageRoute(builder: (context) => ListEmlpoyeeActivity())
         );
       }, Icons.hourglass_empty),
 
       ConfigurationItem('Pedidos', 'Pedidos atendidos', () {
         Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => CreateDemandActivity())
+            MaterialPageRoute(builder: (context) => ListDemandActivity())
         );
       }, Icons.poll),
     ];
