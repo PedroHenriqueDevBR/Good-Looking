@@ -4,6 +4,7 @@ import 'package:good_look_app/models/Demand.dart';
 import 'package:good_look_app/models/Employee.dart';
 import 'package:good_look_app/views/CreateClientActivity.dart';
 import 'package:good_look_app/views/CreateEmployeeActivity.dart';
+import 'package:good_look_app/views/ShowDemandActivity.dart';
 
 
 class ListDemandActivity extends StatefulWidget {
@@ -74,6 +75,14 @@ class _ListDemandActivityState extends State<ListDemandActivity> {
               trailing: Icon(Icons.keyboard_arrow_right),
               title: Text(data[index].client),
               subtitle: Text(data[index].date_service + ' as ' + data[index].hour_service + ' horas'),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ShowDemandActivity(index)
+                  )
+                );
+              },
             ),
             onDismissed: (direction) {
               if (direction == DismissDirection.startToEnd){
