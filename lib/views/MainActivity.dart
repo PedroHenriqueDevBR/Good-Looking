@@ -21,10 +21,17 @@ class _HomeActivityState extends State<HomeActivity> {
     new SettingsFragment(),
   ];
 
-  void _addDemand() {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => ListClientActivity())
+  void _showInfo() {
+    showDialog(
+        context: context,
+      builder: (ctx) {
+          return AlertDialog(
+            title: Text('Informaçoes'),
+            content: Text('Aplicativo desenvolvido para Jaqueline\nVersao atual: 1.0.0'),
+            backgroundColor: Colors.white,
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(8))),
+          );
+      }
     );
   }
 
@@ -79,8 +86,8 @@ class _HomeActivityState extends State<HomeActivity> {
     return AppBar(
       title: Text('Gerenciamento'),
       actions: <Widget>[
-        IconButton(icon: Icon(Icons.library_add),
-            onPressed: _addDemand)
+        IconButton(icon: Icon(Icons.info_outline),
+            onPressed: _showInfo)
       ],
     );
   }
