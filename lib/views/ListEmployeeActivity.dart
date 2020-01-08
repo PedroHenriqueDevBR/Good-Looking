@@ -3,6 +3,7 @@ import 'package:good_look_app/models/Client.dart';
 import 'package:good_look_app/models/Employee.dart';
 import 'package:good_look_app/views/CreateClientActivity.dart';
 import 'package:good_look_app/views/CreateEmployeeActivity.dart';
+import 'package:good_look_app/views/ShowEmployeeActivity.dart';
 
 
 class ListEmlpoyeeActivity extends StatefulWidget {
@@ -65,6 +66,13 @@ class _ListEmlpoyeeActivityState extends State<ListEmlpoyeeActivity> {
               trailing: Icon(Icons.keyboard_arrow_right),
               title: Text(data[index].name),
               subtitle: Text(data[index].phone),
+              onTap: () {
+                Navigator.push(context,
+                  MaterialPageRoute(
+                      builder: (context) => ShowEmployeeActivity()
+                  )
+                );
+              },
             ),
             onDismissed: (direction) {
               if (direction == DismissDirection.startToEnd){
