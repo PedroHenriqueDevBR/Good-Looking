@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:good_look_app/models/Demand.dart';
 import 'package:good_look_app/models/Service.dart';
+import 'package:good_look_app/views/ShowDemandActivity.dart';
 
 class DemandFragment extends StatefulWidget {
   @override
@@ -31,7 +32,11 @@ class _DemandFragmentState extends State<DemandFragment> {
             title: Text(demands[index].client),
             subtitle: Text(demands[index].date_service),
             contentPadding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-            onTap: (){},
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(
+                  builder: (context) => ShowDemandActivity(index)
+              ));
+            },
           );
         },
       ),

@@ -3,6 +3,7 @@ import 'package:good_look_app/models/Client.dart';
 import 'package:good_look_app/models/Service.dart';
 import 'package:good_look_app/views/CreateClientActivity.dart';
 import 'package:good_look_app/views/CreateServiceActivity.dart';
+import 'package:good_look_app/views/ShowServiceActivity.dart';
 
 
 class ListServiceActivity extends StatefulWidget {
@@ -67,6 +68,14 @@ class _ListServiceActivityState extends State<ListServiceActivity> {
               trailing: Icon(Icons.keyboard_arrow_right),
               title: Text(data[index].name),
               subtitle: Text('R\$ ' + data[index].price.toString() + ' ' +data[index].description),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => ShowServiceActivity()
+                  )
+                );
+              },
             ),
             onDismissed: (direction) {
               if (direction == DismissDirection.startToEnd){
