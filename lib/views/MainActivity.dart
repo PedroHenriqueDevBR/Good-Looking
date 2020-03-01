@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:good_look_app/views/CreateClientActivity.dart';
 import 'package:good_look_app/views/DemandFragment.dart';
 import 'package:good_look_app/views/HomeFragment.dart';
-import 'package:good_look_app/views/ListClientActivity.dart';
 import 'package:good_look_app/views/SettingsFragment.dart';
-
 
 class HomeActivity extends StatefulWidget {
   @override
@@ -12,7 +9,6 @@ class HomeActivity extends StatefulWidget {
 }
 
 class _HomeActivityState extends State<HomeActivity> {
-
   int _page_number = 0;
 
   final List<Widget> _pages = [
@@ -24,15 +20,16 @@ class _HomeActivityState extends State<HomeActivity> {
   void _showInfo() {
     showDialog(
         context: context,
-      builder: (ctx) {
+        builder: (ctx) {
           return AlertDialog(
             title: Text('Informaçoes'),
-            content: Text('Aplicativo desenvolvido para Jaqueline\nVersao atual: 1.0.0'),
+            content: Text(
+                'Aplicativo desenvolvido para Jaqueline\nVersao atual: 1.0.0'),
             backgroundColor: Colors.white,
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(8))),
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(8))),
           );
-      }
-    );
+        });
   }
 
   void _alterPage(int index) {
@@ -86,8 +83,7 @@ class _HomeActivityState extends State<HomeActivity> {
     return AppBar(
       title: Text('Gerenciamento'),
       actions: <Widget>[
-        IconButton(icon: Icon(Icons.info_outline),
-            onPressed: _showInfo)
+        IconButton(icon: Icon(Icons.info_outline), onPressed: _showInfo)
       ],
     );
   }

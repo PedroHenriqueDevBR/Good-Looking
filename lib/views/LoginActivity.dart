@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'MainActivity.dart';
 
 class LoginActivity extends StatefulWidget {
   @override
@@ -9,14 +10,19 @@ class _LoginActivityState extends State<LoginActivity> {
   TextEditingController _username = TextEditingController();
   TextEditingController _password = TextEditingController();
 
+  void goToHome(context) {
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => HomeActivity()));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: body(),
+      body: body(context),
     );
   }
 
-  Widget body() {
+  Widget body(context) {
     return Container(
       padding: EdgeInsets.all(16),
       child: Column(
@@ -58,7 +64,9 @@ class _LoginActivityState extends State<LoginActivity> {
                           Radius.circular(20),
                         ),
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        goToHome(context);
+                      },
                     ),
                   ],
                 ),
