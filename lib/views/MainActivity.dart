@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:good_look_app/views/DemandFragment.dart';
 import 'package:good_look_app/views/HomeFragment.dart';
@@ -8,8 +9,10 @@ class HomeActivity extends StatefulWidget {
   _HomeActivityState createState() => _HomeActivityState();
 }
 
-class _HomeActivityState extends State<HomeActivity> {
+class _HomeActivityState extends State<HomeActivity>
+    with SingleTickerProviderStateMixin {
   int _page_number = 0;
+  TabController controller;
 
   final List<Widget> _pages = [
     new HomeFragment(),
@@ -17,74 +20,52 @@ class _HomeActivityState extends State<HomeActivity> {
     new SettingsFragment(),
   ];
 
-  void _showInfo() {
-    showDialog(
-        context: context,
-        builder: (ctx) {
-          return AlertDialog(
-            title: Text('Informaçoes'),
-            content: Text(
-                'Aplicativo desenvolvido para Jaqueline\nVersao atual: 1.0.0'),
-            backgroundColor: Colors.white,
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(8))),
-          );
-        });
+  @override
+  void initState() {
+    controller = new TabController(length: _pages.length, vsync: this);
+    super.initState();
   }
 
-  void _alterPage(int index) {
-    setState(() {
-      _page_number = index;
-    });
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: header(),
-      body: _pages[_page_number],
-      bottomNavigationBar: bottom_navigation(),
-    );
-  }
-
-  Widget bottom_navigation() {
-    return BottomNavigationBar(
-      currentIndex: _page_number,
-      backgroundColor: Colors.deepPurple,
-      unselectedItemColor: Colors.blueGrey[100],
-      selectedItemColor: Colors.white,
-      onTap: _alterPage,
-      selectedFontSize: 13,
-      showUnselectedLabels: false,
-      items: [
-        BottomNavigationBarItem(
-          icon: Icon(Icons.home),
-          title: Text('Home'),
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.date_range),
-          title: Text('Pedidos'),
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.confirmation_number),
-          title: Text('Mais'),
-        ),
-      ],
+      body: body(),
     );
   }
 
   Widget body() {
-    return Center(
-      child: Text('Funcionando'),
-    );
+    return TabBarView(controller: controller, children: _pages);
   }
 
   AppBar header() {
     return AppBar(
-      title: Text('Gerenciamento'),
-      actions: <Widget>[
-        IconButton(icon: Icon(Icons.info_outline), onPressed: _showInfo)
-      ],
+      backgroundColor: Colors.black,
+      title: Text('Good Look'),
+      centerTitle: true,
+      automaticallyImplyLeading: false,
+      bottom: TabBar(
+        controller: controller,
+        indicatorWeight: 3,
+        indicatorColor: Colors.purpleAccent,
+        tabs: <Tab>[
+          Tab(
+            text: 'Início',
+          ),
+          Tab(
+            text: 'Serviços',
+          ),
+          Tab(
+            text: 'Configurações',
+          ),
+        ],
+      ),
     );
   }
 }
