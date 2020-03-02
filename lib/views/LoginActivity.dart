@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:good_look_app/views/CreateUserActivity.dart';
 import 'MainActivity.dart';
 
 class LoginActivity extends StatefulWidget {
@@ -13,6 +14,11 @@ class _LoginActivityState extends State<LoginActivity> {
   void goToHome(context) {
     Navigator.push(
         context, MaterialPageRoute(builder: (context) => HomeActivity()));
+  }
+
+  void goToCreateUser(context) {
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => CreateUserActivity()));
   }
 
   @override
@@ -53,7 +59,9 @@ class _LoginActivityState extends State<LoginActivity> {
                   children: <Widget>[
                     FlatButton(
                       child: Text('Cadastrar'),
-                      textColor: Colors.red,
+                      onPressed: () {
+                        goToCreateUser(context);
+                      },
                     ),
                     RaisedButton(
                       color: Colors.purple,
