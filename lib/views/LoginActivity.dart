@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:good_look_app/views/CreateUserActivity.dart';
+import 'package:sqflite/sqflite.dart';
 import 'MainActivity.dart';
+import '../dal/SQFLite.dart';
 
 class LoginActivity extends StatefulWidget {
   @override
@@ -11,6 +13,11 @@ class _LoginActivityState extends State<LoginActivity> {
   TextEditingController _username = TextEditingController();
   TextEditingController _password = TextEditingController();
 
+  void createDatabase() {
+    var db = SQFLite();
+    db.getDatasabe();
+  }
+
   void goToHome(context) {
     Navigator.push(
         context, MaterialPageRoute(builder: (context) => HomeActivity()));
@@ -19,6 +26,12 @@ class _LoginActivityState extends State<LoginActivity> {
   void goToCreateUser(context) {
     Navigator.push(
         context, MaterialPageRoute(builder: (context) => CreateUserActivity()));
+  }
+
+  @override
+  void initState() {
+    createDatabase();
+    super.initState();
   }
 
   @override

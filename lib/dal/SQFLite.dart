@@ -1,75 +1,28 @@
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
-/*
-
-CREATE TABLE `client` (
-	`id_client`	INTEGER PRIMARY KEY AUTOINCREMENT,
-	`name`	TEXT,
-	`address`	TEXT,
-	`phone`	TEXT,
-	`mail`	TEXT
-);
-
-CREATE TABLE `service` (
-	`id_service`	INTEGER PRIMARY KEY AUTOINCREMENT,
-	`name`	TEXT,
-	`description`	TEXT,
-	`price`	REAL,
-	`cost`	REAL
-);
-
-CREATE TABLE `employee` (
-	`id_employee`	INTEGER PRIMARY KEY AUTOINCREMENT,
-	`name`	TEXT,
-	`phone`	TEXT,
-	`mail`	TEXT,
-	`commission`	REAL
-);
-
-CREATE TABLE `demand` (
-	`id_demand`	INTEGER PRIMARY KEY AUTOINCREMENT,
-	`created_date`	TEXT,
-	`service_date`	TEXT,
-	`service_hour`	TEXT,
-	`client`	INTEGER,
-	`employees`	INTEGER,
-	`services`	INTEGER
-);
-
-* */
-
-
 class SQFLite {
+  static final userDB =
+      "CREATE TABLE user (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, login TEXT NOT NULL UNIQUE, password TEXT NOT NULL);";
+  static final clientDB =
+      "CREATE TABLE client (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, phone TEXT, email TEXT, address TEXT, observations TEXT);";
+  static final serviceDB =
+      "CREATE TABLE service (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, description TEXT, total_cost REAL, price REAL);";
+  static final registerDB =
+      "CREATE TABLE register (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, created_at TEXT NOT NULL, service_date TEXT, hour_service TEXT, description TEXT, done BLOB, amount_paid INTEGER);";
 
-  _createClientDatabase() {
-    return "CREATE TABLE `client` ("
-        "`id_client`	INTEGER PRIMARY KEY AUTOINCREMENT,"
-        "`name`	TEXT,"
-        "`address`	TEXT,"
-        "`phone`	TEXT,"
-        "`mail`	TEXT);";
-  }
-
-  _openDataBase() async {
+  getDatasabe() async {
     final pathDatabase = await getDatabasesPath();
-    final databaseLocate = join(pathDatabase, 'goodlookapp.db');
+    final localeDatabase = join(pathDatabase, "goodlook.db");
 
-    var db = await openDatabase(
-      databaseLocate,
-      version: 1,
-      onCreate: (db, dbLastVersion) {
-        String sql = 'create table if not exists note ('
-            'id INTEGER PRIMARY KEY AUTOINCREMENT, '
-            'title VARCHAR, '
-            'description TEXT'
-            ')';
-        db.execute(sql);
-      },
-    );
+    var response =
+        openDatabase(localeDatabase, version: 1, onCreate: (db, dbLastVersion) {
+      db.execute(userDB);
+      db.execute(clientDB);
+      db.execute(serviceDB);
+      db.execute(registerDB);
+    });
 
-    return db;
+    print("Database is open" + response.toString());
   }
-
-
 }
