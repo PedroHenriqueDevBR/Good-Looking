@@ -23,9 +23,10 @@ class _LoginActivityState extends State<LoginActivity> {
         context, MaterialPageRoute(builder: (context) => HomeActivity()));
   }
 
-  void goToCreateUser(context) {
-    Navigator.push(
+  void goToCreateUser(context) async {
+    final result = await Navigator.push(
         context, MaterialPageRoute(builder: (context) => CreateUserActivity()));
+    print(result);
   }
 
   @override

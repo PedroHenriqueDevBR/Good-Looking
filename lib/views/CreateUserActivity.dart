@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:good_look_app/controllers/UserController.dart';
+import 'package:good_look_app/models/User.dart';
 
 class CreateUserActivity extends StatefulWidget {
   @override
@@ -19,48 +21,67 @@ class _CreateUserActivityState extends State<CreateUserActivity> {
   String _alertPass = '';
   String _alertRepeatePass = '';
 
-  String createUser(context) {
+  UserController controller = new UserController();
+
+  verifyFields(context) async {
     String name;
     String login;
     String pass;
     String repeatePass;
+    bool valid = true;
 
     if (_nameControler.text.isEmpty) {
       name = 'Campo obrigatório';
+      valid = false;
     } else {
       name = '';
     }
 
     if (_loginControler.text.isEmpty) {
       login = 'Campo obrigatório';
+      valid = false;
     } else {
       login = '';
     }
 
     if (_passControler.text.isEmpty) {
       pass = 'Campo obrigatório';
+      valid = false;
     } else {
       pass = '';
     }
 
-    if (_repeatePassControler.text.isEmpty) {
-      repeatePass = 'Campo obrigatório';
-    } else {
-      repeatePass = '';
-    }
-
     if (_repeatePassControler.text != _passControler.text) {
       repeatePass = 'As senhas não conferem';
+      valid = false;
     } else {
-      repeatePass = '';
+      if (_repeatePassControler.text.isEmpty) {
+        repeatePass = 'Campo obrigatório';
+        valid = false;
+      } else {
+        repeatePass = '';
+      }
     }
 
-    setState(() {
-      _alertName = name;
-      _alertLogin = login;
-      _alertPass = pass;
-      _alertRepeatePass = repeatePass;
-    });
+    if (valid) {
+      await createUser();
+    } else {
+      setState(() {
+        _alertName = name;
+        _alertLogin = login;
+        _alertPass = pass;
+        _alertRepeatePass = repeatePass;
+      });
+    }
+  }
+
+  createUser() async {
+    User user = new User();
+    user.name = _nameControler.text;
+    user.login = _loginControler.text;
+    user.pass = _passControler.text;
+    var response = await controller.createUser(user);
+    Navigator.pop(context, response);
   }
 
   void leave(context) {
@@ -113,7 +134,7 @@ class _CreateUserActivityState extends State<CreateUserActivity> {
                 Radius.circular(20),
               )),
               onPressed: () {
-                createUser(context);
+                verifyFields(context);
               },
             )
           ],
