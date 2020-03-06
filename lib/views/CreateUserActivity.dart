@@ -107,39 +107,41 @@ class _CreateUserActivityState extends State<CreateUserActivity> {
   }
 
   Widget myBody() {
-    return Column(
-      children: <Widget>[
-        Container(
-          height: 5,
-          width: MediaQuery.of(context).size.width,
-          color: Colors.purple,
-        ),
-        formCreateUser(),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          mainAxisSize: MainAxisSize.max,
-          children: <Widget>[
-            FlatButton(
-              child: Text('Cancelar'),
-              onPressed: () {
-                leave(context);
-              },
-            ),
-            RaisedButton(
-              child: Text('Cadastrar'),
-              color: Colors.purple,
-              textColor: Colors.white,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(
-                Radius.circular(20),
-              )),
-              onPressed: () {
-                verifyFields(context);
-              },
-            )
-          ],
-        ),
-      ],
+    return SingleChildScrollView(
+      child: Column(
+        children: <Widget>[
+          Container(
+            height: 5,
+            width: MediaQuery.of(context).size.width,
+            color: Colors.purple,
+          ),
+          formCreateUser(),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            mainAxisSize: MainAxisSize.max,
+            children: <Widget>[
+              FlatButton(
+                child: Text('Cancelar'),
+                onPressed: () {
+                  leave(context);
+                },
+              ),
+              RaisedButton(
+                child: Text('Cadastrar'),
+                color: Colors.purple,
+                textColor: Colors.white,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(
+                  Radius.circular(20),
+                )),
+                onPressed: () {
+                  verifyFields(context);
+                },
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 

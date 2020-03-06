@@ -5,17 +5,12 @@ import '../models/User.dart';
 class UserController {
   var USER_TABLE = "user";
 
-  static final userDB =
-      "CREATE TABLE user (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, login TEXT NOT NULL UNIQUE, password TEXT NOT NULL);";
-
   Future<Database> getDatasabe() async {
     final pathDatabase = await getDatabasesPath();
     final localeDatabase = join(pathDatabase, "goodlook.db");
 
-    var db = await openDatabase(localeDatabase, version: 1,
-        onCreate: (db, dbLastVersion) {
-      db.execute(userDB);
-    });
+    Database db = await openDatabase(localeDatabase,
+        version: 1, onCreate: (Database db, int version) async {});
 
     return db;
   }
@@ -29,8 +24,33 @@ class UserController {
     };
 
     var response = await db.insert(USER_TABLE, data);
+    await db.close();
     return response;
   }
 
-  getUser(int id) {}
+  getUserById(int id) async {
+    Database db = await getDatasabe();
+    String sql = 'select * from $USER_TABLE where id = $id;';
+    List<Map> queryResult = await db.rawQuery(sql);
+    await db.close();
+    return queryResult;
+  }
+
+  login(String login, String password) async {
+    if (login.isEmpty || password.isEmpty) {
+      return -1;
+    }
+
+    Database db = await getDatasabe();
+    String sql =
+        'select id from $USER_TABLE where login like "$login" and password like "$password";';
+    List<Map> queryResult = await db.rawQuery(sql);
+    await db.close();
+
+    if (queryResult.length > 0) {
+      return queryResult[0]['id'];
+    } else {
+      return -1;
+    }
+  }
 }
