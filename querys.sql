@@ -17,7 +17,9 @@ CREATE TABLE client (
 	phone TEXT,
 	email TEXT,
 	address TEXT,
-	observations TEXT
+	observations TEXT,
+	user int,
+	FOREIGN KEY(user) REFERENCES user(id)
 );
 
 /*
@@ -36,14 +38,16 @@ CREATE TABLE service (
 */
 CREATE TABLE register (
 	id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-	created_at DATE NOT NULL,
-	service_date DATE,
-	hour_service HOUR,
+	created_at TEXT NOT NULL,
+	service_date TEXT,
+	hour_service TEXT,
 	description TEXT,
 	done BLOB,
-	amount_paid INTEGER,
+	amount_paid REAL,
 	client int,
-	FOREIGN KEY(client) REFERENCES client(id)
+	user int,
+	FOREIGN KEY(client) REFERENCES client(id),
+	FOREIGN KEY(user) REFERENCES user(id)
 );
 
 CREATE TABLE register_services (
@@ -59,18 +63,61 @@ CREATE TABLE register_services (
  * Querys para gerenciamento de usuários
 */
 
+-- Cadastrar novo usuário
+insert into user (name, login, password)
+values ('', '', '');
+
 -- Seleciona usuário pelo id
-select * from $USER_TABLE where id = $id;
+select * from user where id = 1;
 
 -- Seleciona usuário por username
-select * from $USER_TABLE where login like "$username";
+select * from user where login like "";
 
 -- Verifica se um usuário está cadastrado, com base no username e password
-select * from $USER_TABLE where login like "$login" and password like "$password";
+select * from user where login like "" and password like "";
 
 
 /*
  * Querys para gerenciamento de clientes
 */
 
--- Selecionar todos os clientes vinulados a um usuário
+-- Cadastrar novo cliente
+insert into client 
+(name, phone, email, address, observations, user)
+values 
+('', '', '', '', '', 1);
+
+-- Selecionar todos os clientes vinculados a um usuário
+select c.* from client c inner join user u
+on c.user = u.id;
+
+-- Selecionar todos os usuários vinculados ao usuário logado
+select * from client c inner join user u
+on c.user = u.id 
+where u.id = 1;
+
+
+/*
+ * Querys para gerenciamento de servicos
+*/
+
+-- Cadastrar novo servico
+insert into service (name, description, total_cost, price)
+values ('', '', 0, 0);
+
+
+
+/*
+ * Querys para gerenciamento de registros
+*/
+
+-- Cadastrar novo registro
+insert into register 
+(created_at, service_date, hour_service, description, done, amount_paid, client, user)
+values
+('2020-03-07', '2020-03-07', '18:00', 'Fist register', 1, 1, 1, 1);
+
+-- Cadastrar um servico em um determinado registro
+insert into register_services (register, service)
+values (1, 1);
+
