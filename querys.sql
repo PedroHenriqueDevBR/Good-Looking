@@ -43,3 +43,17 @@ CREATE TABLE "register" (
 	"done"	BLOB,
 	"amount_paid"	INTEGER
 );
+
+
+/*
+ *  Querys para gerenciamento de usuários
+*/
+
+-- Seleciona usuário pelo id
+select * from $USER_TABLE where id = $id;
+
+-- Seleciona usuário por username
+select * from $USER_TABLE where login like "$username";
+
+-- Verifica se um usuário está cadastrado, com base no username e password
+select * from $USER_TABLE where login like "$login" and password like "$password";
