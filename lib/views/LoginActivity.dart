@@ -52,9 +52,11 @@ class _LoginActivityState extends State<LoginActivity> {
     final resultId = await Navigator.push(
         context, MaterialPageRoute(builder: (context) => CreateUserActivity()));
     var user = await _controller.getUserById(resultId);
-    setState(() {
-      _username.text = user[0]['login'];
-    });
+    if (user.length > 0) {
+      setState(() {
+        _username.text = user[0]['login'];
+      });
+    }
   }
 
   @override

@@ -36,6 +36,18 @@ class UserController {
     return queryResult;
   }
 
+  usernameRegistered(String username) async {
+    Database db = await getDatasabe();
+    String sql = 'select * from $USER_TABLE where login like "$username";';
+    List<Map> queryResult = await db.rawQuery(sql);
+    await db.close();
+    if (queryResult.length > 0) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   login(String login, String password) async {
     if (login.isEmpty || password.isEmpty) {
       return -1;

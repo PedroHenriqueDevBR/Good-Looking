@@ -23,6 +23,15 @@ class _CreateUserActivityState extends State<CreateUserActivity> {
 
   UserController controller = new UserController();
 
+  void showMessage(String message) {
+    _scaffoldKey.currentState.showSnackBar(
+      SnackBar(
+        duration: Duration(seconds: 2),
+        content: Text(message),
+      ),
+    );
+  }
+
   verifyFields() async {
     String name;
     String login;
@@ -76,19 +85,21 @@ class _CreateUserActivityState extends State<CreateUserActivity> {
   }
 
   createUser() async {
-    User user = new User();
-    user.name = _nameControler.text;
-    user.login = _loginControler.text;
-    user.pass = _passControler.text;
-    var response = await controller.createUser(user);
-
-    Navigator.pop(context, response);
+    if (await controller.usernameRegistered(_loginControler.text)) {
+      showMessage('Login já registrado, digite outro login.');
+    } else {
+      User user = new User();
+      user.name = _nameControler.text;
+      user.login = _loginControler.text;
+      user.pass = _passControler.text;
+      var response = await controller.createUser(user);
+      showMessage('usuário cadastrado, efetue o login!');
+      Navigator.pop(context, response);
+    }
   }
 
   void leave() {
-    // _scaffoldKey.currentState
-    //     .showSnackBar(new SnackBar(content: new Text('value')));
-    Navigator.pop(context);
+    Navigator.pop(context, 0);
   }
 
   @override
