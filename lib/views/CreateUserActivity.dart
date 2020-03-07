@@ -9,7 +9,7 @@ class CreateUserActivity extends StatefulWidget {
 }
 
 class _CreateUserActivityState extends State<CreateUserActivity> {
-  final GlobalKey _globalKey = new GlobalKey<ScaffoldState>();
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
   TextEditingController _nameControler = TextEditingController();
   TextEditingController _loginControler = TextEditingController();
@@ -23,7 +23,7 @@ class _CreateUserActivityState extends State<CreateUserActivity> {
 
   UserController controller = new UserController();
 
-  verifyFields(context) async {
+  verifyFields() async {
     String name;
     String login;
     String pass;
@@ -81,19 +81,57 @@ class _CreateUserActivityState extends State<CreateUserActivity> {
     user.login = _loginControler.text;
     user.pass = _passControler.text;
     var response = await controller.createUser(user);
+
     Navigator.pop(context, response);
   }
 
-  void leave(context) {
+  void leave() {
+    // _scaffoldKey.currentState
+    //     .showSnackBar(new SnackBar(content: new Text('value')));
     Navigator.pop(context);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: _globalKey,
+      key: _scaffoldKey,
       appBar: myAppBar(),
-      body: myBody(),
+      body: SingleChildScrollView(
+        child: Column(
+          children: <Widget>[
+            Container(
+              height: 5,
+              width: MediaQuery.of(context).size.width,
+              color: Colors.purple,
+            ),
+            formCreateUser(),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisSize: MainAxisSize.max,
+              children: <Widget>[
+                FlatButton(
+                  child: Text('Cancelar'),
+                  onPressed: () {
+                    leave();
+                  },
+                ),
+                RaisedButton(
+                  child: Text('Cadastrar'),
+                  color: Colors.purple,
+                  textColor: Colors.white,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(
+                    Radius.circular(20),
+                  )),
+                  onPressed: () {
+                    verifyFields();
+                  },
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
     );
   }
 
@@ -107,42 +145,7 @@ class _CreateUserActivityState extends State<CreateUserActivity> {
   }
 
   Widget myBody() {
-    return SingleChildScrollView(
-      child: Column(
-        children: <Widget>[
-          Container(
-            height: 5,
-            width: MediaQuery.of(context).size.width,
-            color: Colors.purple,
-          ),
-          formCreateUser(),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            mainAxisSize: MainAxisSize.max,
-            children: <Widget>[
-              FlatButton(
-                child: Text('Cancelar'),
-                onPressed: () {
-                  leave(context);
-                },
-              ),
-              RaisedButton(
-                child: Text('Cadastrar'),
-                color: Colors.purple,
-                textColor: Colors.white,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(
-                  Radius.circular(20),
-                )),
-                onPressed: () {
-                  verifyFields(context);
-                },
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
+    return Container();
   }
 
   Widget formCreateUser() {
