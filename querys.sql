@@ -76,6 +76,20 @@ select * from user where login like "";
 -- Verifica se um usuário está cadastrado, com base no username e password
 select * from user where login like "" and password like "";
 
+-- altera os dados de um usuário pelo id
+update user 
+set name = '',
+login = ''
+where id = 1;
+
+-- update password
+update user 
+set password = ''
+where id = 1;
+
+-- deletar usuário
+delete from user where id = 3;
+
 
 /*
  * Querys para gerenciamento de clientes
@@ -96,6 +110,17 @@ select * from client c inner join user u
 on c.user = u.id 
 where u.id = 1;
 
+-- altera os dados de um cliente pelo id
+update client set 
+name = '',
+email = '',
+address = '',
+observations = ''
+where id = 1;
+
+-- deletar usuário
+delete from client where id = 2;
+
 
 /*
  * Querys para gerenciamento de servicos
@@ -105,7 +130,16 @@ where u.id = 1;
 insert into service (name, description, total_cost, price)
 values ('', '', 0, 0);
 
+-- Alterar os dados de um servico pelo id
+update service set 
+name = '',
+description = '',
+total_cost = 0,
+price = 0
+where id = 1;
 
+-- Deletar servico pelo id
+delete from service where id = 3;
 
 /*
  * Querys para gerenciamento de registros
@@ -121,3 +155,8 @@ values
 insert into register_services (register, service)
 values (1, 1);
 
+-- Selecionar todos os servicos vinculados a um determinado registro.
+select r.*, s.* from register r inner join register_services rs 
+on r.id = rs.register inner join service s 
+on rs.service = s.id
+where r.id = 1;
