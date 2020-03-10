@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 class ShowClientActivity extends StatefulWidget {
   @override
   _ShowClientActivityState createState() => _ShowClientActivityState();
@@ -12,6 +11,7 @@ class _ShowClientActivityState extends State<ShowClientActivity> {
     return Scaffold(
       appBar: header(),
       body: body(),
+      floatingActionButton: fab(),
     );
   }
 
@@ -24,7 +24,17 @@ class _ShowClientActivityState extends State<ShowClientActivity> {
   AppBar header() {
     return AppBar(
       title: Text('Cliente'),
+      automaticallyImplyLeading: false,
+      centerTitle: true,
+      backgroundColor: Colors.black,
     );
   }
 
+  FloatingActionButton fab() {
+    return FloatingActionButton.extended(
+      onPressed: () {},
+      label: Text("Editar"),
+      icon: Icon(Icons.edit),
+    );
+  }
 }

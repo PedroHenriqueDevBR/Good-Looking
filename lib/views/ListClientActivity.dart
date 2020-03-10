@@ -3,14 +3,12 @@ import 'package:good_look_app/models/Client.dart';
 import 'package:good_look_app/views/CreateClientActivity.dart';
 import 'package:good_look_app/views/ShowClientActivity.dart';
 
-
 class ListClientActivity extends StatefulWidget {
   @override
   _ListClientActivityState createState() => _ListClientActivityState();
 }
 
 class _ListClientActivityState extends State<ListClientActivity> {
-
   List<Client> data = [
     Client('Maria', 'Rua das flores', '86978458754', 'maria@gmail.com'),
     Client('Carla', 'Rua das flores', '86978458754', 'maria@gmail.com'),
@@ -30,80 +28,82 @@ class _ListClientActivityState extends State<ListClientActivity> {
 
   Widget body() {
     return ListView.separated(
-      separatorBuilder: (context, index) => Divider(),
-      itemCount: data.length,
-      itemBuilder: (context, index) {
-        return Dismissible(
-          key: Key(index.toString()),
-          background: Container(
-            padding: EdgeInsets.all(16),
-            color: Colors.blue,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: <Widget>[
-                Icon(
-                  Icons.edit,
-                  color: Colors.white,
-                )
-              ],
+        separatorBuilder: (context, index) => Divider(),
+        itemCount: data.length,
+        itemBuilder: (context, index) {
+          return Dismissible(
+            key: Key(index.toString()),
+            background: Container(
+              padding: EdgeInsets.all(16),
+              color: Colors.blue,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  Icon(
+                    Icons.edit,
+                    color: Colors.white,
+                  )
+                ],
+              ),
             ),
-          ),
-          secondaryBackground: Container(
-            padding: EdgeInsets.all(16),
-            color: Colors.red,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: <Widget>[
-                Icon(
-                  Icons.delete_outline,
-                  color: Colors.white,
-                )
-              ],
+            secondaryBackground: Container(
+              padding: EdgeInsets.all(16),
+              color: Colors.red,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: <Widget>[
+                  Icon(
+                    Icons.delete_outline,
+                    color: Colors.white,
+                  )
+                ],
+              ),
             ),
-          ),
-          child: ListTile(
-            leading: Icon(Icons.person_outline),
-            trailing: Icon(Icons.keyboard_arrow_right),
-            title: Text(data[index].name),
-            subtitle: Text(data[index].phone),
-            onTap: () {
-              Navigator.push(context,
-                MaterialPageRoute(
-                    builder: (context) => ShowClientActivity()
-                )
-              );
+            child: ListTile(
+              leading: Icon(Icons.people_outline),
+              trailing: Icon(Icons.keyboard_arrow_right),
+              title: Text(data[index].name),
+              subtitle: Text(data[index].phone),
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => ShowClientActivity()));
+              },
+            ),
+            onDismissed: (direction) {
+              if (direction == DismissDirection.startToEnd) {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => CreateClientActivity()));
+              } else if (direction == DismissDirection.endToStart) {
+                setState(() {
+                  data.removeAt(index);
+                });
+              }
             },
-          ),
-          onDismissed: (direction) {
-            if (direction == DismissDirection.startToEnd){
-              Navigator.push(context, MaterialPageRoute(builder: (context) => CreateClientActivity()));
-            } else if (direction == DismissDirection.endToStart) {
-              setState(() {
-                data.removeAt(index);
-              });
-            }
-
-          },
-        );
-      }
-    );
+          );
+        });
   }
 
   AppBar header() {
     return AppBar(
+      automaticallyImplyLeading: false,
+      centerTitle: true,
       title: Text('Clientes'),
+      backgroundColor: Colors.black,
     );
   }
 
   Widget fab() {
     return FloatingActionButton.extended(
+      backgroundColor: Colors.purple,
       label: Text('Cadastrar'),
       icon: Icon(Icons.add),
       onPressed: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => CreateClientActivity())
-        );
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => CreateClientActivity()));
       },
     );
   }

@@ -91,7 +91,7 @@ class _LoginActivityState extends State<LoginActivity> {
             Column(
               children: <Widget>[
                 _textViewDefault('Nome de usuário', _username, false),
-                _textViewDefault('Senha', _password, false),
+                _textViewDefault('Senha', _password, true),
                 Container(
                   padding: EdgeInsets.all(4),
                   child: Row(
