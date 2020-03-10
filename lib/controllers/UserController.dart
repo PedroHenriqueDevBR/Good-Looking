@@ -65,4 +65,42 @@ class UserController {
       return -1;
     }
   }
+
+  updateData(User user, int id) async {
+    Database db = await getDatasabe();
+    String sql =
+        'update $USER_TABLE set name = "${user.name}", login = "${user.login}" where id = $id;';
+    int affectedLines = await db.rawUpdate(sql);
+    await db.close();
+    if (affectedLines > 0) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  updatePassword(int id, String password) async {
+    Database db = await getDatasabe();
+    String sql =
+        'update $USER_TABLE set password = "$password" where id = $id;';
+    int affectedLines = await db.rawUpdate(sql);
+    await db.close();
+    if (affectedLines > 0) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  deleteUser(int id) async {
+    Database db = await getDatasabe();
+    String sql = 'delete from $USER_TABLE where id = $id;';
+    int affectedLines = await db.rawUpdate(sql);
+    await db.close();
+    if (affectedLines > 0) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }

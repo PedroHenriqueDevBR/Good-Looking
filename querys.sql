@@ -63,31 +63,31 @@ CREATE TABLE register_services (
  * Querys para gerenciamento de usuários
 */
 
--- Cadastrar novo usuário
+-- Cadastrar novo usuário - OK
 insert into user (name, login, password)
 values ('', '', '');
 
--- Seleciona usuário pelo id
+-- Seleciona usuário pelo id - OK
 select * from user where id = 1;
 
--- Seleciona usuário por username
+-- Seleciona usuário por username - OK
 select * from user where login like "";
 
--- Verifica se um usuário está cadastrado, com base no username e password
+-- Verifica se um usuário está cadastrado, com base no username e password - OK
 select * from user where login like "" and password like "";
 
--- altera os dados de um usuário pelo id
+-- altera os dados de um usuário pelo id - OK
 update user 
 set name = '',
 login = ''
 where id = 1;
 
--- update password
+-- update password - OK
 update user 
 set password = ''
 where id = 1;
 
--- deletar usuário
+-- deletar usuário - OK
 delete from user where id = 3;
 
 
