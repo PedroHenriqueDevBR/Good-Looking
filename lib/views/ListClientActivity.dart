@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:good_look_app/controllers/clientController.dart';
 import 'package:good_look_app/models/Client.dart';
 import 'package:good_look_app/views/CreateClientActivity.dart';
 import 'package:good_look_app/views/ShowClientActivity.dart';
@@ -9,16 +10,19 @@ class ListClientActivity extends StatefulWidget {
 }
 
 class _ListClientActivityState extends State<ListClientActivity> {
-  List<Client> data = [
-    Client('Maria', 'Rua das flores', '86978458754', 'maria@gmail.com'),
-    Client('Carla', 'Rua das flores', '86978458754', 'maria@gmail.com'),
-    Client('Andressa', 'Rua das flores', '86978458754', 'maria@gmail.com'),
-    Client('Larissa', 'Rua das flores', '86978458754', 'maria@gmail.com'),
-    Client('Thaiane', 'Rua das flores', '86978458754', 'maria@gmail.com'),
-  ];
+  ClientController controller = new ClientController();
+
+  List<Client> data = [];
+  var clients = [];
+
+  getAllClients() async {
+    clients = await controller.getAllClients(1);
+    print(clients[0]);
+  }
 
   @override
   Widget build(BuildContext context) {
+    getAllClients();
     return Scaffold(
       appBar: header(),
       body: body(),
