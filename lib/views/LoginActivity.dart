@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:good_look_app/controllers/UserController.dart';
-import 'package:good_look_app/models/User.dart';
 import 'package:good_look_app/views/CreateUserActivity.dart';
 import 'MainActivity.dart';
 import '../dal/SQFLite.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginActivity extends StatefulWidget {
   @override
@@ -30,12 +30,18 @@ class _LoginActivityState extends State<LoginActivity> {
     );
   }
 
+  void createSection(userId) async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setInt('userId', userId);
+  }
+
   void login() async {
     if (_username.text.isEmpty || _password.text.isEmpty) {
       showMessage('Preencha todos os campos');
     } else {
       var result = await _controller.login(_username.text, _password.text);
       if (result > 0) {
+        createSection(result);
         goToHome();
       } else {
         showMessage('Credenciais inválidas');

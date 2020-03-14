@@ -1,28 +1,45 @@
 import 'package:flutter/material.dart';
 import 'package:good_look_app/controllers/clientController.dart';
-import 'package:good_look_app/models/Client.dart';
 import 'package:good_look_app/views/CreateClientActivity.dart';
 import 'package:good_look_app/views/ShowClientActivity.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ListClientActivity extends StatefulWidget {
+  ClientController controller = new ClientController();
+
+  getLoggedUser() async {
+    final prefs = await SharedPreferences.getInstance();
+    int id = prefs.getInt('userId');
+    return id;
+  }
+
+  getAllClients() async {
+    int id = await getLoggedUser();
+    var response = controller.getAllClients(id);
+    return response;
+  }
+
   @override
-  _ListClientActivityState createState() => _ListClientActivityState();
+  _ListClientActivityState createState() {
+    getAllClients();
+    return _ListClientActivityState();
+  }
 }
 
 class _ListClientActivityState extends State<ListClientActivity> {
-  ClientController controller = new ClientController();
-
-  List<Client> data = [];
   var clients = [];
 
-  getAllClients() async {
-    clients = await controller.getAllClients(1);
-    print(clients[0]);
+  showData() async {
+    await widget.getAllClients().then((response) {
+      setState(() {
+        clients = response;
+      });
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    getAllClients();
+    showData();
     return Scaffold(
       appBar: header(),
       body: body(),
@@ -33,7 +50,7 @@ class _ListClientActivityState extends State<ListClientActivity> {
   Widget body() {
     return ListView.separated(
         separatorBuilder: (context, index) => Divider(),
-        itemCount: data.length,
+        itemCount: clients.length,
         itemBuilder: (context, index) {
           return Dismissible(
             key: Key(index.toString()),
@@ -66,8 +83,8 @@ class _ListClientActivityState extends State<ListClientActivity> {
             child: ListTile(
               leading: Icon(Icons.people_outline),
               trailing: Icon(Icons.keyboard_arrow_right),
-              title: Text(data[index].name),
-              subtitle: Text(data[index].phone),
+              title: Text(clients[index]['name']),
+              subtitle: Text(clients[index]['phone']),
               onTap: () {
                 Navigator.push(
                     context,
@@ -83,7 +100,8 @@ class _ListClientActivityState extends State<ListClientActivity> {
                         builder: (context) => CreateClientActivity()));
               } else if (direction == DismissDirection.endToStart) {
                 setState(() {
-                  data.removeAt(index);
+                  // clients.removeAt(index);
+                  print('Deletado.');
                 });
               }
             },

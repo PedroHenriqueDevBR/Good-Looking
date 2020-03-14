@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:good_look_app/controllers/clientController.dart';
 import 'package:good_look_app/models/Client.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class CreateClientActivity extends StatefulWidget {
   @override
@@ -22,6 +24,12 @@ class _CreateClientActivityState extends State<CreateClientActivity> {
   String _txtMailError = '';
   String _txtAddressError = '';
   String _txtObservationsError = '';
+
+  getLoggedUser() async {
+    final prefs = await SharedPreferences.getInstance();
+    int id = prefs.getInt('userId');
+    return id;
+  }
 
   createClient() async {
     Client client = new Client();
@@ -53,7 +61,8 @@ class _CreateClientActivityState extends State<CreateClientActivity> {
     }
 
     if (valid) {
-      int response = await controller.nweClient(client, 1);
+      int id = await getLoggedUser();
+      int response = await controller.nweClient(client, id);
       if (response > 0) {
         cleartFields();
         _globalKey.currentState.showSnackBar(
@@ -118,28 +127,28 @@ class _CreateClientActivityState extends State<CreateClientActivity> {
   Widget form() {
     return Column(
       children: <Widget>[
-        _textFieldDefault(
-            'Nome (*)', 'Digite o nome do cliente', _txtName, _txtNameError),
+        _textFieldDefault('Nome (*)', 'Digite o nome do cliente', _txtName,
+            TextInputType.text, _txtNameError),
         SizedBox(
           height: 15,
         ),
-        _textFieldDefault(
-            'Endereço', 'Endereço do cliente', _txtAddress, _txtAddressError),
+        _textFieldDefault('Endereço', 'Endereço do cliente', _txtAddress,
+            TextInputType.multiline, _txtAddressError),
         SizedBox(
           height: 15,
         ),
-        _textFieldDefault(
-            'Contato', 'Melhor contato', _txtPhone, _txtPhoneError),
+        _textFieldDefault('Contato', 'Melhor contato', _txtPhone,
+            TextInputType.phone, _txtPhoneError),
         SizedBox(
           height: 15,
         ),
-        _textFieldDefault(
-            'E-Mail', 'E-mail principal', _txtMail, _txtMailError),
+        _textFieldDefault('E-Mail', 'E-mail principal', _txtMail,
+            TextInputType.emailAddress, _txtMailError),
         SizedBox(
           height: 15,
         ),
         _textFieldDefault('Observaçoes', 'Detalhes sobre o(a) cliente',
-            _txtObservations, _txtObservationsError),
+            _txtObservations, TextInputType.multiline, _txtObservationsError),
       ],
     );
   }
@@ -163,7 +172,7 @@ class _CreateClientActivityState extends State<CreateClientActivity> {
     );
   }
 
-  TextField _textFieldDefault(label, hint, controller, error) {
+  TextField _textFieldDefault(label, hint, controller, keyboardType, error) {
     if (error == '') {
       error = null;
     }
