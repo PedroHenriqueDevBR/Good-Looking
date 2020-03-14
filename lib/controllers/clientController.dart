@@ -22,6 +22,14 @@ class ClientController {
     return clients;
   }
 
+  getClient(clientId) async {
+    Database db = await getDatasabe();
+    String sql = 'select * from client where id = $clientId;';
+    List<Map> client = await db.rawQuery(sql);
+    db.close();
+    return client;
+  }
+
   nweClient(Client client, userId) async {
     Database db = await getDatasabe();
     String sql =

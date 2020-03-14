@@ -89,7 +89,8 @@ class _ListClientActivityState extends State<ListClientActivity> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => ShowClientActivity()));
+                        builder: (context) =>
+                            ShowClientActivity(clients[index]['id'])));
               },
             ),
             onDismissed: (direction) {
