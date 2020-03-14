@@ -27,7 +27,7 @@ Framework desenvolvido em dart para facilitar o desenvolvimento de aplicativos m
 
 ## Modelagem do projeto
 
-<img src="https://user-images.githubusercontent.com/36716898/70194053-eb55ac80-16df-11ea-80d3-144e7d8ddc8b.jpg" alt="Modelagem da aplicação" width="80%" />
+<img src="https://github.com/PedroHenriqueDevBR/Good-Look-App/blob/master/planning/files/goodlook-models.png" alt="Modelagem da aplicação" width="80%" />
 
 A modelagem do aplicativo consiste em 4 classes, são elas:
  - Cliente (client)
