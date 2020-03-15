@@ -26,6 +26,7 @@ class ListClientActivity extends StatefulWidget {
 }
 
 class _ListClientActivityState extends State<ListClientActivity> {
+  GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
   var clients = [];
 
   showData() async {
@@ -34,6 +35,43 @@ class _ListClientActivityState extends State<ListClientActivity> {
         clients = response;
       });
     });
+  }
+
+  showMessage(String msg) {
+    _globalKey.currentState.showSnackBar(SnackBar(
+      content: Text('$msg'),
+      duration: Duration(seconds: 2),
+    ));
+  }
+
+  createNewClient() async {
+    await Navigator.push(context,
+        MaterialPageRoute(builder: (context) => CreateClientActivity())).then(
+      (response) {
+        showData();
+      },
+    );
+  }
+
+  deleteClient(int clientId, int index) async {
+    await widget.controller.deleteClient(clientId).then((response) {
+      clients.remove(index);
+      showMessage('Cliente deletado');
+    });
+  }
+
+  updateClient(int clientId, int index) async {
+    await Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => CreateClientActivity(
+                  clientId: clientId,
+                ))).then(
+      (response) {
+        print('Passou por aqui');
+        showData();
+      },
+    );
   }
 
   @override
@@ -45,6 +83,7 @@ class _ListClientActivityState extends State<ListClientActivity> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _globalKey,
       appBar: header(),
       body: body(),
       floatingActionButton: fab(),
@@ -57,7 +96,7 @@ class _ListClientActivityState extends State<ListClientActivity> {
         itemCount: clients.length,
         itemBuilder: (context, index) {
           return Dismissible(
-            key: Key(index.toString()),
+            key: UniqueKey(),
             background: Container(
               padding: EdgeInsets.all(16),
               color: Colors.blue,
@@ -97,17 +136,12 @@ class _ListClientActivityState extends State<ListClientActivity> {
                             ShowClientActivity(clients[index]['id'])));
               },
             ),
-            onDismissed: (direction) {
-              if (direction == DismissDirection.startToEnd) {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => CreateClientActivity()));
-              } else if (direction == DismissDirection.endToStart) {
-                setState(() {
-                  // clients.removeAt(index);
-                  print('Deletado.');
-                });
+            direction: DismissDirection.horizontal,
+            onDismissed: (direction) async {
+              if (direction == DismissDirection.endToStart) {
+                deleteClient(clients[index]['id'], index);
+              } else if (direction == DismissDirection.startToEnd) {
+                updateClient(clients[index]['id'], index);
               }
             },
           );
@@ -129,9 +163,7 @@ class _ListClientActivityState extends State<ListClientActivity> {
       label: Text('Cadastrar'),
       icon: Icon(Icons.add),
       onPressed: () {
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => CreateClientActivity()));
-        showData();
+        createNewClient();
       },
     );
   }

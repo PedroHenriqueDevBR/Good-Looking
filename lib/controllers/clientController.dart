@@ -30,7 +30,7 @@ class ClientController {
     return client;
   }
 
-  nweClient(Client client, userId) async {
+  newClient(Client client, userId) async {
     Database db = await getDatasabe();
     String sql =
         'insert into client (name, phone, email, address, observations, user) values ("${client.name}", "${client.phone}", "${client.email}", "${client.address}", "${client.observations}", $userId);';
