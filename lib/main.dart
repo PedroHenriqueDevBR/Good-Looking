@@ -6,7 +6,9 @@ void main() {
   runApp(MaterialApp(
     title: 'Gerenciamento de OS',
     debugShowCheckedModeBanner: true,
-    theme: ThemeData(primarySwatch: Colors.purple),
+    theme: ThemeData(
+      primarySwatch: Colors.deepPurple,
+    ),
     home: LoginActivity(),
   ));
 }

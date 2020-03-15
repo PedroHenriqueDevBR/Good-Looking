@@ -21,7 +21,6 @@ class ListClientActivity extends StatefulWidget {
 
   @override
   _ListClientActivityState createState() {
-    getAllClients();
     return _ListClientActivityState();
   }
 }
@@ -38,8 +37,13 @@ class _ListClientActivityState extends State<ListClientActivity> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  initState() {
     showData();
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: header(),
       body: body(),
@@ -127,6 +131,7 @@ class _ListClientActivityState extends State<ListClientActivity> {
       onPressed: () {
         Navigator.push(context,
             MaterialPageRoute(builder: (context) => CreateClientActivity()));
+        showData();
       },
     );
   }

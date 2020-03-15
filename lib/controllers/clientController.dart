@@ -17,8 +17,8 @@ class ClientController {
     String sql =
         'select c.* from client c inner join user u on c.user = u.id where u.id = $userId;';
     List<Map> clients = await db.rawQuery(sql);
-    db.close();
 
+    db.close();
     return clients;
   }
 

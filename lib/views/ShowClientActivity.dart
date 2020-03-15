@@ -12,7 +12,6 @@ class ShowClientActivity extends StatefulWidget {
 
   ShowClientActivity(int clientId) {
     this.clientId = clientId;
-    print('Client ID: $clientId');
   }
 
   @override
@@ -31,9 +30,11 @@ class _ShowClientActivityState extends State<ShowClientActivity> {
 
   showData() async {
     await widget.getClient().then((response) {
-      setState(() {
-        client = response[0];
-      });
+      if (this.mounted) {
+        setState(() {
+          client = response[0];
+        });
+      }
     });
   }
 
@@ -41,23 +42,58 @@ class _ShowClientActivityState extends State<ShowClientActivity> {
   Widget build(BuildContext context) {
     showData();
     return Scaffold(
-      appBar: header(),
+      // appBar: header(),
       body: body(),
     );
   }
 
   Widget body() {
-    return Container(
-      padding: EdgeInsets.all(16),
-      child: Column(
-        children: <Widget>[
-          Text('Id: ${client["id"]}'),
-          Text('Nome: ${client["name"]}'),
-          Text('email: ${client["email"]}'),
-          Text('phone: ${client["phone"]}'),
-          Text('observations: ${client["observations"]}'),
-        ],
-      ),
+    return CustomScrollView(
+      slivers: <Widget>[
+        SliverAppBar(
+          pinned: true,
+          snap: true,
+          floating: true,
+          expandedHeight: MediaQuery.of(context).size.height / 3,
+          flexibleSpace: FlexibleSpaceBar(
+            title: Text(
+              '${client["id"]} - ${client["name"].toString().split(' ')[0]}',
+              softWrap: true,
+              textAlign: TextAlign.center,
+            ),
+            centerTitle: true,
+            collapseMode: CollapseMode.parallax,
+            background: Image.asset('images/woman.jpg', fit: BoxFit.cover),
+          ),
+        ),
+        SliverFillRemaining(
+          fillOverscroll: true,
+          hasScrollBody: false,
+          child: Container(
+            padding: EdgeInsets.all(16),
+            child: Column(
+              children: <Widget>[
+                ListTile(
+                  title: Text('${client["name"]}'),
+                  leading: Icon(Icons.person),
+                ),
+                ListTile(
+                  title: Text('${client["email"]}'),
+                  leading: Icon(Icons.mail),
+                ),
+                ListTile(
+                  title: Text('${client["phone"]}'),
+                  leading: Icon(Icons.phone),
+                ),
+                ListTile(
+                  title: Text('${client["observations"]}'),
+                  leading: Icon(Icons.description),
+                ),
+              ],
+            ),
+          ),
+        )
+      ],
     );
   }
 
