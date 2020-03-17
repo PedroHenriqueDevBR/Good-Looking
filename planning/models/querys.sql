@@ -30,7 +30,9 @@ CREATE TABLE service (
 	name TEXT NOT NULL,
 	description TEXT,
 	total_cost REAL,
-	price REAL
+	price REAL,
+	user int,
+	FOREIGN KEY(user) REFERENCES user(id)
 );
 
 /*
@@ -57,6 +59,36 @@ CREATE TABLE register_services (
 	FOREIGN KEY(register) REFERENCES register(id),
 	FOREIGN KEY(service) REFERENCES service(id)
 );
+
+-- Cadastrar novo usuário - OK
+insert into user (name, login, password)
+values ('admin', 'admin', 'admin');
+
+-- Cadastrar novo cliente
+insert into client 
+(name, phone, email, address, observations, user)
+values 
+('Maria da Luz', '12345678', 'maria@gmail.com', 'Rua das flores', 'Não cadastrado', 1),
+('Carla Sammya', '12345678', 'sammya@gmail.com', 'Rua das flores', 'Não cadastrado', 1),
+('July', '12345678', 'julianday@gmail.com', 'Rua das flores', 'Não cadastrado', 1),
+('Keily', '12345678', 'keily@gmail.com', 'Rua das flores', 'Não cadastrado', 1);
+
+-- Cadastrar novo servico
+insert into service (name, description, total_cost, price, user) 
+values 
+('Escova', 'Faz escova nos cabelos', 5, 10, 1),
+('Progressiva', 'Faz progressiva nos cabelos', 16, 50, 1),
+('Corte normal', 'Corte de cabelo masculino', 3, 15, 1);
+
+-- Cadastrar novo registro
+insert into register 
+(created_at, service_date, hour_service, description, done, amount_paid, client, user)
+values
+('2020-03-07', '2020-03-07', '18:00', 'Fist register', 1, 1, 1, 1);
+
+-- Cadastrar um servico em um determinado registro
+insert into register_services (register, service)
+values (1, 1);
 
 
 /*
@@ -118,7 +150,7 @@ address = '',
 observations = ''
 where id = 1;
 
--- deletar usuário
+-- deletar cliente
 delete from client where id = 2;
 
 
@@ -137,6 +169,22 @@ description = '',
 total_cost = 0,
 price = 0
 where id = 1;
+
+-- selecionar todos os serviços
+select s.* from service s inner join user u 
+on s.user = u.id where u.id = 2;
+
+-- Selecionar um serviço específico pelo id
+select s.* from service s inner join user u 
+on s.user = u.id where s.id = 2;
+
+-- Atualizar dados de um Serviço
+update service set 
+name = 'Corte de cabelo',
+description = 'Descrição qualquer',
+total_cost = 0,
+price = 0
+where id = 3;
 
 -- Deletar servico pelo id
 delete from service where id = 3;
