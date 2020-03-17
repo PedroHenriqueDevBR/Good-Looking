@@ -1,71 +1,39 @@
-# Projeto de conclusão de disciplina (Levantamento de requisitos)
+# GOOD LOOKING
 
-## Descrição geral
+Aplicativo desenvolvido para facilitar a o gerenciamento de serviços prestados por profissionais da área da estética. Disponibilizando uma forma simples de registrar todos os serviços prestados e ter um controle consistente sobre os dados de clientes e serviços prestados.
 
-Aplicativo desenvolvido coom proposta de conclusão de disciplina, Introdução a Administração.  
-Aplicativo desenvolvido utilizando o framework Flutter.
+## DESENVOLVIMENTO
 
-## Descrição do aplicativo
+Aplicativo android desenvolvido utilizando visual studio code como editor de códigos, junto ao framework Flutter, que foi desenvolvido na linguagem de programação Dart.
 
-Aplicativo android desenvolvido utilizando a IDE Android Studio juntamento com o framework Flutter e Dart como a linguagem de programação.
-O desenvolvimento do aplicativo está sendo realizado para uma pessoa específica, por esse motivo os requisitos também serão bem específicos.
-O objetivo principal do aplicativo é facilitar o controle de clientes e ordem de serviços que são solicitados para profissinal da área de estética.
+### Tecnologias utilizadas
 
-## Tecnologias utilizadas
+1. **Flutter** - Framework desenvolvido em dart para facilitar o desenvolvimento de aplicativos multiplataforma (Android e IOS).
 
-### Android Studio
+<img src="https://cdn.dribbble.com/users/2592071/screenshots/7327591/media/ddcddda1151bdabce519bfc559a8e250.png" alt="Modelagem da aplicação" width="50%" />
 
-A IDE escolhida para o desenvolvimento da aplicação, por ser completa e oferecer uma maior produtividade.
+2. **Visual Studio Code** - Por ser leve, simples de utilizar e já possuir extensões para o desenvolvimento com Flutter, o visual studio code foi o editor de códigos escolhido para o desenvolvimento do projeto.
 
-<img src="https://dfilitto.com.br/wp-content/uploads/2019/04/android-studio-logo.png" alt="Android studio logo" width="50%" />
+<img src="https://cdn.dribbble.com/users/2592071/screenshots/7327591/media/ddcddda1151bdabce519bfc559a8e250.png" alt="Android studio logo" width="40%" />
 
-### Flutter
+3. **SQLite** - Banco de dados utilizado para armazenar as informações do usuários e de todas os registros da aplicação.
 
-Framework desenvolvido em dart para facilitar o desenvolvimento de aplicativos multiplataforma.
+<img src="https://cdn.dribbble.com/users/2592071/screenshots/7327591/media/ddcddda1151bdabce519bfc559a8e250.png" alt="Modelagem da aplicação" width="40%" />
 
-<img src="https://simpleactivity435203168.files.wordpress.com/2019/09/flutter-1024x486.png?w=1086" alt="Modelagem da aplicação" width="50%" />
 
 ## Modelagem do projeto
 
-<img src="https://github.com/PedroHenriqueDevBR/Good-Look-App/blob/master/planning/files/goodlook-models.png" alt="Modelagem da aplicação" width="80%" />
+<img src="https://github.com/PedroHenriqueDevBR/Good-Look-App/blob/master/planning/files/goodlook-models.png" alt="Modelagem da aplicação" width="100%" />
 
-A modelagem do aplicativo consiste em 4 classes, são elas:
- - Cliente (client)
- - Funcionário (employee)
- - Serviço (Servico)
- - Pedido (Demand)
-
-**Cliente**: Controla os dados dos clientes, como o cadastro simples de dados.
-
-**funcionário**: Controla os dados dos ajudantes, conforme informações passadas em sala de aula, a pessoa para qual esse aplicativo está sendo desenvolvido trabalha só. O nome da **funcionario** refere-se as pessoas que eventualmente venham a ajudar em algum serviço, nesse caso fica registrado a ajuda.
-
-**Serviço**: São os serviços prestados, como exemplo maquiagem.
-
-**Pedido**: Registra todos os pedidos (pendentes e realizados), o cadastro dos serviços é realizado com base nos dados de **cliente** e **serviços**.
+As entidades que compõem as funcionalidades que serão disponibilizadas no aplicativo, são:
+ - **User** - Define informações sobre os usuários que utilizam a aplicação
+ - **Client** - Gerencia os dados dos clientes cadastrados.
+ - **Service** - Gerencia os serviços oferecidos pelo profissional da estética.
+ - **Register** - Armazena informações sobre os serviços prestados para clientes.
 
 
 ## Mapa da aplicação
-Há 3 (três) atividades principais que servem de base para o acesso ás demais, são elas:
 
-***Home***: Página inicial, por onde o aplicativo inicia.
+Abaixo será apresentado o mapa da aplicação.
 
-***Registros***: Listagem das solicitações pendentes.
-
-***Configurações***: Responsável pelo cadastro e modificação dos dados da aplicação, isso inclui o cadastro de clientes, funcionários e serviços.
-
-<img src="https://user-images.githubusercontent.com/36716898/70194092-193af100-16e0-11ea-8d88-e3a5a3c0f472.jpg" alt="Modelagem da aplicação" width="100%" />
-
-Outras atividades estão listadas na modelagem apresentada, são atividades específicas, realizam apenas uma ação, que pode ser o CRUD de uma entidade por exemplo.
-
-## Documentação do Flutter
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,****
-samples, guidance on mobile development, and a full API reference.
+<img src="https://cdn.dribbble.com/users/2592071/screenshots/7327591/media/ddcddda1151bdabce519bfc559a8e250.png" alt="Modelagem da aplicação" width="100%" />
