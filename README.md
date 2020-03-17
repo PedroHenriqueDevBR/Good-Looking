@@ -10,15 +10,15 @@ Aplicativo android desenvolvido utilizando visual studio code como editor de có
 
 1. **Flutter** - Framework desenvolvido em dart para facilitar o desenvolvimento de aplicativos multiplataforma (Android e IOS).
 
-<img src="https://cdn.dribbble.com/users/2592071/screenshots/7327591/media/ddcddda1151bdabce519bfc559a8e250.png" alt="Modelagem da aplicação" width="50%" />
+<img src="https://github.com/PedroHenriqueDevBR/Good-Look-App/blob/master/planning/docs/flutter.png" alt="Modelagem da aplicação" width="50%" />
 
 2. **Visual Studio Code** - Por ser leve, simples de utilizar e já possuir extensões para o desenvolvimento com Flutter, o visual studio code foi o editor de códigos escolhido para o desenvolvimento do projeto.
 
-<img src="https://cdn.dribbble.com/users/2592071/screenshots/7327591/media/ddcddda1151bdabce519bfc559a8e250.png" alt="Android studio logo" width="40%" />
+<img src="https://github.com/PedroHenriqueDevBR/Good-Look-App/blob/master/planning/docs/vscode.png" alt="Android studio logo" width="40%" />
 
 3. **SQLite** - Banco de dados utilizado para armazenar as informações do usuários e de todas os registros da aplicação.
 
-<img src="https://cdn.dribbble.com/users/2592071/screenshots/7327591/media/ddcddda1151bdabce519bfc559a8e250.png" alt="Modelagem da aplicação" width="40%" />
+<img src="https://github.com/PedroHenriqueDevBR/Good-Look-App/blob/master/planning/docs/sqlite.png" alt="Modelagem da aplicação" width="40%" />
 
 
 ## Modelagem do projeto
@@ -36,4 +36,4 @@ As entidades que compõem as funcionalidades que serão disponibilizadas no apli
 
 Abaixo será apresentado o mapa da aplicação.
 
-<img src="https://cdn.dribbble.com/users/2592071/screenshots/7327591/media/ddcddda1151bdabce519bfc559a8e250.png" alt="Modelagem da aplicação" width="100%" />
+<img src="https://github.com/PedroHenriqueDevBR/Good-Look-App/blob/master/planning/docs/goodlook-models-screens.png" alt="Modelagem da aplicação" width="100%" />
