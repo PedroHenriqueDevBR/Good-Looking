@@ -36,4 +36,4 @@ As entidades que compõem as funcionalidades que serão disponibilizadas no apli
 
 Abaixo será apresentado o mapa da aplicação.
 
-<img src="https://github.com/PedroHenriqueDevBR/Good-Look-App/blob/master/planning/docs/goodlook-models-screens.png" alt="Modelagem da aplicação" width="100%" />
+<img src="https://github.com/PedroHenriqueDevBR/Good-Look-App/blob/master/planning/files/goodlook-models-screens.png" alt="Modelagem da aplicação" width="100%" />
